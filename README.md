@@ -1,64 +1,45 @@
-**GoogleGmailSkill (Mycroft new API)**
+GoogleGmail-Skill
 ===================
 
-For Mycroft with new API (https://home.mycroft.ai)
 A skill to use with Mycroft which allow to get emails from your Gmail Inbox.
 
 ----------
 
 
-Installation
+Install Using MSM (Mycroft Skill Manager)
 -------------------
-Is necesary to make this procedure two times
 
-outside mycroft virtual environment for python 2
-
-    sudo pip install google-api-python-client apiclient oauth2client httplib2
+    msm install https://github.com/jcasoft/GoogleGmailSkill.git
 
 
 
-Now enter inside mycroft virtual environment
+Install Manualy
+-------------------
 
-Inside mycroft virtual environment
-
+    cd  /opt/mycroft/skills
+    git clone https://github.com/jcasoft/GoogleGmailSkill.git
     workon mycroft
-
-    pip install google-api-python-client apiclient oauth2client httplib2
-
-
-Now go to Mycroft skills folder
-
-    cd  $HOME/.mycroft/skills
-
-    git clone  https://github.com/jcasoft/GoogleGmailSkill.git
-
-<i class="icon-cog"></i>Add 'GoogleGmailSkill' section in your Mycroft configuration file on:
-
-    $HOME/.mycroft/mycroft.conf
-
-  	"GoogleGmailSkill": {	
-	    "loginEnabled": true,
-	    "maxResults": 10,
-	    "time_format": 12	# 12 for AM/PM and 24 for 24 hours time format
-	}
+    pip install -r requirements.txt
 
 
+Authorize Google GMail
+-------------------
 
 Authorize Google GMail Skill in distro with local web browser, wait web browse open and select "Allow"
 
     From your command line go to mycroft skills folder
 
-    cd  $HOME/.mycroft/skills
-
+    cd  /opt/mycroft/skills
+    workon mycroft
     python GoogleGmailSkill
 
 	
-Authorize Google GMail Skill in distro without local web browser
+Authorize GoogleGMailSkill in distro without local web browser
 
     From your command line go to mycroft skills folder
 
-    cd  $HOME/.mycroft/skills
-
+    cd  /opt/mycroft/skills
+    workon mycroft
     python GoogleGmailSkill --noauth_local_webserver
 
 Open the generated link in computer with browser and wait the verification code and paste
@@ -67,9 +48,17 @@ Open the generated link in computer with browser and wait the verification code 
 
 
 
-Restart Skills
 
-    ./start.sh skills
+Edit your ~/.mycroft/mycroft.conf
+
+on "GoogleGmailSkill" section (added automatically)
+
+Restart Mycroft
+
+./stop-mycroft.sh
+
+./start-mycroft.sh debug
+
 
 ----------
 

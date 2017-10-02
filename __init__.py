@@ -27,7 +27,7 @@ from datetime import datetime
 logger = getLogger(dirname(__name__))
 sys.path.append(abspath(dirname(__file__)))
 
-__author__ = 'j c a soft'
+__author__ = 'jcasoft'
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 CID = "992603803855-18na240ttgkgm4va2mvtiucqjreejvrm.apps.googleusercontent.com"
@@ -36,16 +36,6 @@ APPLICATION_NAME = 'Mycroft GMail Skill' + __author__.upper()
 
 loginEnabled = ""
 max_results = 10
-#time_format = 12
-
-"""
-****************************************************
-Check the location of the Mycroft third_party Skill
-****************************************************
-"""
-python_out 		=  "/usr/bin/python2.7"
-third_party_skill	= expanduser("~")+"/.mycroft/skills/GoogleGmailSkill/"
-effects 		= third_party_skill + "effects/"
 
 
 def get_credentials():
@@ -122,16 +112,23 @@ def GetMessage(user_id, msg_id):
 
 def parse_datetime_string(string):
     if '+' in string:
-	if "UTC" in string or "GMT" in string or "EST" in string or "PST" in string or "MEZ" in string:
+	if "T" in string:
 		string = string[:-6]
-	return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S +%f")
+		return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S +%f")
+	else:
+		return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S +%f")
+
     elif '-' in string:
-	if "UTC" in string or "GMT" in string or "EST" in string or "PST" in string or "MEZ" in string:
+	if "T" in string:
 		string = string[:-6]
-	return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S -%f")
+		return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S")
+	else:
+		return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S -%f")
+
     else:
 	string = string[:-6]
-	return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S +%f")
+	return datetime.strptime(string,"%a, %d %b %Y %H:%M:%S")
+
 
 class GoogleGmailSkill(MycroftSkill):
     """
@@ -204,17 +201,11 @@ class GoogleGmailSkill(MycroftSkill):
 
     def __init__(self):
         super(GoogleGmailSkill, self).__init__('GoogleGmailSkill')
-    	"""
-	Get the Google calandar parameters from config
-	today = time.strftime("%Y-%m-%dT%H:%M:%S-06:00") for use on create event
-	"""
+
 	self.loginEnabled = self.config.get('loginEnabled')
 	self.maxResults = self.config.get('maxResults')
 	self.time_format = self.config.get('time_format')
 
-	global python_out
-	global third_party_skill
-	global effects
 	global time_format
 
 	loginEnabled = self.loginEnabled 
