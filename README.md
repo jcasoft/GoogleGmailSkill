@@ -1,4 +1,4 @@
-GoogleGmail-Skill
+GoogleGmailSkill
 ===================
 
 A skill to use with Mycroft which allow to get emails from your Gmail Inbox.
