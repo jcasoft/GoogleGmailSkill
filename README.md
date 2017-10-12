@@ -37,9 +37,11 @@ Authorize Google GMail Skill in distro with local web browser, wait web browse o
     python GoogleGmailSkill
 
 
-Edit your ~/.mycroft/mycroft.conf
+Edit your mycroft.conf
+on "GoogleGmailSkill"  edit your options
 
-on "GoogleGmailSkill" section (added automatically)
+     cd ~/mycroft/.mycroft
+     sudo nano mycroft.conf
 
 
 
@@ -73,8 +75,6 @@ Open the generated link in computer with browser and wait the verification code 
 
 The installation process generates automatically the file ~/.mycroft/mycroft.conf and ~/.credentials/mycroft-gmail-skill.json
 
-Edit your ~/.mycroft/mycroft.conf
-on "GoogleGmailSkill"  edit your options
 
 Then copy the following files and fix the permissions
 
@@ -83,8 +83,13 @@ Then copy the following files and fix the permissions
      sudo chmod -R 777 /home/mycroft/.credentials
 
      sudo cp /home/pi/.mycroft/mycroft.conf /home/mycroft/.mycroft/mycroft.conf
-     sudo chmod -R 777 /home/pi/.mycroft
+     sudo chmod -R 777 /home/mycroft/.mycroft
 
+Edit your mycroft.conf
+on "GoogleGmailSkill"  edit your options
+
+     cd /home/mycroft/.mycroft
+     sudo nano mycroft.conf
 
 
 
